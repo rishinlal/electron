@@ -76,3 +76,5 @@ tts.patch
 color_chooser.patch
 printing.patch
 verbose_generate_breakpad_symbols.patch
+global_menu_bar_registrar_x11.patch
+chrome_process_finder.patch

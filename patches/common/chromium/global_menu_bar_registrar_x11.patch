@@ -1,0 +1,41 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Milan Burda <miburda@microsoft.com>
+Date: Fri, 26 Oct 2018 20:10:06 +0200
+Subject: global_menu_bar_registrar_x11.patch
+
+Use atom::GlobalMenuBarX11::GetPathForWindow
+
+diff --git a/chrome/browser/ui/views/frame/global_menu_bar_registrar_x11.cc b/chrome/browser/ui/views/frame/global_menu_bar_registrar_x11.cc
+index b112b0f2f81c823856dbce01e75f1bb4cbad03bf..cead675a74d33ac990b1a77fe5f9c2c6416ac249 100644
+--- a/chrome/browser/ui/views/frame/global_menu_bar_registrar_x11.cc
++++ b/chrome/browser/ui/views/frame/global_menu_bar_registrar_x11.cc
+@@ -4,10 +4,10 @@
+ 
+ #include "chrome/browser/ui/views/frame/global_menu_bar_registrar_x11.h"
+ 
++#include "atom/browser/ui/views/global_menu_bar_x11.h"
+ #include "base/bind.h"
+ #include "base/debug/leak_annotations.h"
+ #include "base/logging.h"
+-#include "chrome/browser/ui/views/frame/global_menu_bar_x11.h"
+ #include "content/public/browser/browser_thread.h"
+ 
+ using content::BrowserThread;
+@@ -70,7 +70,7 @@ GlobalMenuBarRegistrarX11::~GlobalMenuBarRegistrarX11() {
+ 
+ void GlobalMenuBarRegistrarX11::RegisterXID(unsigned long xid) {
+   DCHECK(registrar_proxy_);
+-  std::string path = GlobalMenuBarX11::GetPathForWindow(xid);
++  std::string path = atom::GlobalMenuBarX11::GetPathForWindow(xid);
+ 
+   ANNOTATE_SCOPED_MEMORY_LEAK; // http://crbug.com/314087
+   // TODO(erg): The mozilla implementation goes to a lot of callback trouble
+@@ -91,7 +91,7 @@ void GlobalMenuBarRegistrarX11::RegisterXID(unsigned long xid) {
+ 
+ void GlobalMenuBarRegistrarX11::UnregisterXID(unsigned long xid) {
+   DCHECK(registrar_proxy_);
+-  std::string path = GlobalMenuBarX11::GetPathForWindow(xid);
++  std::string path = atom::GlobalMenuBarX11::GetPathForWindow(xid);
+ 
+   ANNOTATE_SCOPED_MEMORY_LEAK; // http://crbug.com/314087
+   // TODO(erg): The mozilla implementation goes to a lot of callback trouble
